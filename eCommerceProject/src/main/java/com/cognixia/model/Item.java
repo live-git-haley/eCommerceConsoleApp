@@ -1,31 +1,37 @@
 package com.cognixia.model;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable{
 	
-	enum Category {
-		CLOTHES,
-	    SHOES,
-	    ACCESSORIES,
-	    OTHER
+	enum Size {
+		S,
+		M,
+		L,
+		XL
 	  }
 	private Long id;
 	private String name;
-	private double price; 
-	private Category category;
+	private double price;
+	private String category;
+	private Size size;
 	
-	public Item(Long id, String name, double price, Category category) {
+	public Item(Long id, String name, double price, String category, Size size) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.category = category;
+		this.size = size;
 	}
 	
 	public Item() {
+		
 		this.id = -1L;
-		this.name = "N/A";
+		this.name = "Na";
 		this.price = 0.0;
-		this.category = Category.OTHER;
+		this.category = "Na";
+		this.size = Size.L;
 	}
 
 	public Long getId() {
@@ -52,12 +58,28 @@ public class Item {
 		this.price = price;
 	}
 
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize() {
+		this.size = Size.L;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", size=" + size
+				+ "]";
+	}
+	
+	
+	
 }
