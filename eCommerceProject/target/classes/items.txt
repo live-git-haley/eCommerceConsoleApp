@@ -4,3 +4,4 @@
 4,black cargo pants,8.00,clothing,S
 5,tan cargo pants,8.00,clothing,M
 6,Nike sweatpants,8.00,clothing,L
+7,Nike Hoodie,9.00,clothing,L

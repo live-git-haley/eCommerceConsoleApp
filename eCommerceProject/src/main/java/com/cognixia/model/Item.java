@@ -70,9 +70,24 @@ public class Item implements Serializable{
 		return size;
 	}
 
-	public void setSize() {
-		this.size = Size.L;
+	public void setSize(String s) {
+		switch(s) {
+		case "S": 
+			this.size = Size.S;
+			break;
+		case "M":
+			this.size = Size.M;
+			break;
+		case "L":
+			this.size = Size.L;
+			break;
+		case "XL":
+			this.size = Size.XL; 
+			break;
+		
+		}
 	}
+	
 
 	@Override
 	public String toString() {
