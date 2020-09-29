@@ -67,9 +67,7 @@ public class ReadObjectsFromFile {
 			    		
 			    	
 			    	}
-			    	System.out.println("Item : " + item.toString());
-			    	System.out.println("ID>>>> " + item.getId());
-
+			    	
 			    	itemsMap.put(item.getId(), item);
 			    	line  = br.readLine();
 			    	
@@ -77,10 +75,6 @@ public class ReadObjectsFromFile {
 			}
 			finally {
 				
-			}
-			System.out.println("Before returning items Map>>> : ");
-			for(Item i: itemsMap.values()) {
-				System.out.println(i.toString());
 			}
 			
 			

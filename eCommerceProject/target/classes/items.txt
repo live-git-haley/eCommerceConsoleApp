@@ -1,7 +1,6 @@
-1,Led Zeppelin shirt,5.00,clothing,S
-2,Aaliyah shirt,5.00,clothing,L
-3,Coca-Cola shirt,5.00,clothing,M
-4,black cargo pants,8.00,clothing,S
-5,tan cargo pants,8.00,clothing,M
-6,Nike sweatpants,8.00,clothing,L
-7,Nike Hoodie,9.00,clothing,L
+1,Led Zeppelin shirt,50.00,clothing,S
+2,Aaliyah shirt,45.00,clothing,L
+3,Coca-Cola shirt,35.00,clothing,M
+4,Nike sweatpants,80.00,clothing,L
+5,Nike Hoodie,39.00,clothing,L
+6,Addidas Yeezy's, 78.00,shoes,L

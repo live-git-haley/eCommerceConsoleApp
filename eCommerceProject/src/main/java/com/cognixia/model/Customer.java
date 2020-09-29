@@ -2,27 +2,30 @@ package com.cognixia.model;
 
 public class Customer {
 	
+	private static double count;
+	
+	static {
+		count = 1L;
+	}
+	
 	private double id;
-	private String fname;
+	private String name;
 	private String username;
 	private String password;
-	private String address;
 	
-	public Customer(double id, String fname, String username, String password, String address) {
+	public Customer(String name, String username, String password) {
 		super();
-		this.id = id;
-		this.fname = fname;
+		this.id = count++;
+		this.name = name;
 		this.username = username;
 		this.password = password;
-		this.address = address;
 	}
 	
 	public Customer() {
-		this.id = -1L;
-		this.fname = "N/A";
+		this.id = count++;
+		this.name = "N/A";
 		this.username = "N/A";
 		this.password = "N/A";
-		this.address = "N/A";
 	}
 
 	public double getId() {
@@ -33,12 +36,12 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -57,13 +60,12 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getAddress() {
-		return address;
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + "]";
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 	
 	
 

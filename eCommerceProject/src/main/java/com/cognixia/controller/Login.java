@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class Login extends Login1{
+public class Login {
 	
 	static int first = 1;
 	final static int second = 2;
