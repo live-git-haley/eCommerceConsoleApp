@@ -29,21 +29,23 @@ public class Purchase {
 		Scanner input = new Scanner(System.in);
 		
 		int item = input.nextInt();
-		ItemHistory itemH1 = new ItemHistory();
+		
 		Long id = Long.parseLong(Integer.toString(item));
 		Item i = items.get(id);
 		System.out.println(i.toString());
-		itemH1.setPrice(items.get(id).getPrice());
-		itemH1.setPurchaseDate(new Date());
+		ItemHistory itemH1 = new ItemHistory(new Date(),items.get(id).getPrice(), i);
+
 		history.add(itemH1);
 	
 		do {
 			System.out.println("Please enter Item # : ");
 			item = input.nextInt();
 			Long id2 = Long.parseLong(Integer.toString(item));
+			
 
 			if(item!= 0) {
-				ItemHistory itemH = new ItemHistory(new Date(),items.get(id2).getPrice());
+				System.out.println(items.get(id2));
+				ItemHistory itemH = new ItemHistory(new Date(),items.get(id2).getPrice(), items.get(id2) );
 				history.add(itemH);
 				
 			}

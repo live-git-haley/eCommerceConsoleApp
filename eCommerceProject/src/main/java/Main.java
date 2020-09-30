@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,12 +56,16 @@ public class Main {
 						print.printItems(allItems);
 						Set<ItemHistory> history = purchase.purchaseItems(allItems);
 						allHistory.put(currentC.getId(), history);
+						
 				
 						break;
 					//return items
 					case 2:
 						Set <ItemHistory> currentHistory = allHistory.get(currentC.getId());
-						for(ItemHistory i: currentHistory) {
+						List<Integer> picked =print.returnPrint(currentHistory);
+						
+						
+						for(int i: picked) {
 							System.out.println(i);
 						}	
 						break;

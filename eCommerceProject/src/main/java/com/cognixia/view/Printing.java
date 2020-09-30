@@ -2,6 +2,8 @@ package com.cognixia.view;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -9,6 +11,7 @@ import java.util.Set;
 import com.cognixia.controller.Login;
 import com.cognixia.model.Customer;
 import com.cognixia.model.Item;
+import com.cognixia.model.ItemHistory;
 
 public class Printing {
 	
@@ -156,8 +159,41 @@ public class Printing {
 		
 	}
 	
+	public List<Integer> returnPrint(Set<ItemHistory> purchased){
+		
+		List<Integer> itemsNums = new ArrayList<Integer>();
+	
+		for(ItemHistory i: purchased) {
+			System.out.println(i.toString());
+		}
+		
+		Scanner in = new Scanner(System.in);
+		int itemNum = 100;
+		
+		while(itemNum!= 0) {
+			System.out.println("Please select Items to return: ");
+			System.out.println("Press 0 to Enter");
+			System.out.println();
+			itemNum = in.nextInt();
+			if(itemNum!= 0) {
+			itemsNums.add(itemNum);
+			}
+		}
+		
+		return(itemsNums);
+	
+		
+		
+		
+		
+		
+		
+		
+	
+	
 	
 	
 	
 
+}
 }

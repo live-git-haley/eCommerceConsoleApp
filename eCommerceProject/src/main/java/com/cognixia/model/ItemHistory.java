@@ -8,23 +8,26 @@ public class ItemHistory {
 	private Date purchaseDate;
 	private double price;
 	private static Long count;
+	private Item item;
 	
 	static {
 		count = 1L;
 	}
 	
 	
-	public ItemHistory(Date purchaseDate, double price) {
+	public ItemHistory(Date purchaseDate, double price, Item item) {
 		super();
 		this.id = count++;
 		this.purchaseDate = purchaseDate;
 		this.price = price;
+		this.item = item;
 	}
 	
 	public ItemHistory() {
 		this.id = count++;
 		this.purchaseDate = new Date();
 		this.price = 0.0;
+		this.item = new Item();
 	}
 	
 	
@@ -49,9 +52,9 @@ public class ItemHistory {
 
 	@Override
 	public String toString() {
-		return "ItemHistory [id=" + id + ", purchaseDate=" + purchaseDate + ", price=" + price + "]";
+		return "Item #" + item.getId() + "[ purchaseDate=" + purchaseDate + " item=" + item.toString() + "]";
 	}
-	
+
 	
 
 }
