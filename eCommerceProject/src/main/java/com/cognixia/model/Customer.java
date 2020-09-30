@@ -2,13 +2,13 @@ package com.cognixia.model;
 
 public class Customer {
 	
-	private static double count;
+	private static Long count;
 	
 	static {
 		count = 1L;
 	}
 	
-	private double id;
+	private Long id;
 	private String name;
 	private String username;
 	private String password;
@@ -28,11 +28,11 @@ public class Customer {
 		this.password = "N/A";
 	}
 
-	public double getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(double id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

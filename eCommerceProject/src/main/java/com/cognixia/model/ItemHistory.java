@@ -7,15 +7,26 @@ public class ItemHistory {
 	private Long id;
 	private Date purchaseDate;
 	private double price;
+	private static Long count;
+	
+	static {
+		count = 1L;
+	}
 	
 	
-	
-	public ItemHistory(Long id, Date purchaseDate, double price) {
+	public ItemHistory(Date purchaseDate, double price) {
 		super();
-		this.id = id;
+		this.id = count++;
 		this.purchaseDate = purchaseDate;
 		this.price = price;
 	}
+	
+	public ItemHistory() {
+		this.id = count++;
+		this.purchaseDate = new Date();
+		this.price = 0.0;
+	}
+	
 	
 	public Long getId() {
 		return id;
@@ -35,6 +46,12 @@ public class ItemHistory {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemHistory [id=" + id + ", purchaseDate=" + purchaseDate + ", price=" + price + "]";
+	}
+	
 	
 
 }
