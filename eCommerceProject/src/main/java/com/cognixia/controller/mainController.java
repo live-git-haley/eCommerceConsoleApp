@@ -90,8 +90,9 @@ public class mainController {
 		System.out.println("4: Exit");
 
 		int choice = input.nextInt();
-		input.close();
-		
+		/*
+		 * input.close();
+		 */
 		return(choice);
 	}
 	
@@ -149,42 +150,21 @@ public class mainController {
 	
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
 	
-		Customer c1 = new Customer("Haley", "hahowell", "haley1234");
-		Customer c2 = new Customer("Kobe", "kch", "kobe1234");
-		
-		Set<Customer> customers = new HashSet<Customer>();
-		
-		customers.add(c1);
-		customers.add(c2);
-	
-		ReadObjectsFromFile in = new ReadObjectsFromFile();
-		WriteObjectsToFile out = new WriteObjectsToFile();
-		
-		
-		Map<Long,Item> textItems = in.readFilefromTxt("src/main/resources/items.txt");
-		String [] one = {"j", "l", "a"};
-		String temp = one[0];
-		
-		Set<String> set = new TreeSet();
-		
-		Arrays.sort(one);
-		for(String s: one) {
-			
-			System.out.println(s);
-		}
-		for(String s: one) {
-			set.add(s);
-		}
-		
-		for(String s: set) {
-			System.out.println(s);
-		}
-		String s = "Hello";
-		for(int i = s.length()-1; i >= 0; i--) {
-			System.out.println(s.charAt(i));
-		}
-		
-		
+//		Customer c1 = new Customer("Haley", "hahowell", "haley1234");
+//		Customer c2 = new Customer("Kobe", "kch", "kobe1234");
+//		
+//		Set<Customer> customers = new HashSet<Customer>();
+//		
+//		customers.add(c1);
+//		customers.add(c2);
+//	
+//		ReadObjectsFromFile in = new ReadObjectsFromFile();
+//		WriteObjectsToFile out = new WriteObjectsToFile();
+//		
+//		
+//		Map<Long,Item> textItems = in.readFilefromTxt("src/main/resources/items.txt");
+//	
+//		
 		
 //		printItems();
 //		Set<Integer> itemspicked = purchaseItems();
@@ -204,27 +184,27 @@ public class mainController {
 		
 		
 //		}
-//		int choice = welcomeMessage();
-//		
-//		switch(choice) {
-//		
-//		case 1: 
-//			System.out.println("You chose to view the store");
-//			break;
-//		case 2:
-//			System.out.println("You chose to login");
-//			break;
-//		case 3:
-//			register();
-//			break;
-//			
-//		case 4:
-//			System.out.println("You chose to exit");
-//			break;
-//			
-//		
-//	
-//	}
+		int choice = welcomeMessage();
+		
+		switch(choice) {
+		
+		case 1: 
+			printItems();
+			break;
+		case 2:
+			System.out.println("You chose to login");
+			break;
+		case 3:
+			register();
+			break;
+			
+		case 4:
+			System.out.println("You chose to exit");
+			break;
+			
+		
+	
+	}
 	
 	
 	}
