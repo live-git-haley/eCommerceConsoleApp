@@ -3,9 +3,11 @@ package com.cognixia.view;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -22,6 +24,8 @@ public class Printing {
 		
 		
 		Scanner input = new Scanner(System.in);
+		int choice =0;
+		do {
 		System.out.println();
 		System.out.println("What would you like to do?");
 		System.out.println();
@@ -29,8 +33,20 @@ public class Printing {
 		System.out.println("2: Login");
 		System.out.println("3: Register New Account");
 		System.out.println("4: Exit");
+		
 
-		int choice = input.nextInt();
+		try {
+			choice = input.nextInt();
+			
+		}
+		catch(InputMismatchException e){
+			//throw new IncorrectInputException("Please enter a number...");
+			System.out.println("Please enter a valid number...");
+		
+		}
+		input.nextLine();
+		}
+		while(choice!= 4 && choice!=2 && choice!=3 && choice!=1);
 		/*
 		 * input.close();
 		 */
@@ -163,37 +179,78 @@ public class Printing {
 	}
 	
 	public List<Long> returnPrint(List<ItemHistory> purchased) throws IncorrectInputException{
-		
 		List<Long> itemsNums = new ArrayList<Long>();
-	
+		Date today = new Date();
+
+		int number = 0;
+		int count =1;
 		for(ItemHistory i: purchased) {
+			if(count == 2) {
+				Date d1 = new Date(2020, 01, 01);
+				i.setPurchaseDate(d1);
+				
+			}
+			count++;
 			System.out.println(i.toString());
 		}
 		
 		Scanner in = new Scanner(System.in);
 		int itemNum = 100;
-		while(itemNum!= 0) {
+		Long valid = -100L;
+		for(ItemHistory k: purchased) {
+			int itemDate = k.getPurchaseDate().getMonth();
+			int todayDate = today.getMonth();
+			if( todayDate-itemDate > 3) {
+				
+				 valid = k.getId();
+			}
+		}
+		
+		do {
+		 
 			System.out.println("Please select Items to return: ");
 			System.out.println("Press 0 to Enter");
 			System.out.println();
 			try {
 			itemNum = in.nextInt();
+				
+			
 			}
 			catch (InputMismatchException e) {
-				System.out.println("HELLO EXCEPTION");
-//				if(itemNum < 0) {
-//				       throw new IncorrectInputException("Please enter a number......");
-//				    }
+				
+				System.out.println("Please enter a valid number....");
+				in.nextLine();
+			}
+		
+			if(itemNum == valid) {
+				System.out.println("Unable to make return: You must return this item within 3 months of purchase date...");
+				continue;
 			}
 			
-			if(itemNum!= 0) {
+			else if(itemNum!= 0 && valid != -100L) {
 			itemsNums.add(Long.parseLong(Integer.toString(itemNum)));
 			}
 		}
+		while(itemNum!= 0);
+		
+
 		
 		return(itemsNums);
 	
+	}
+	
+	public static void main(String[] args) {
 		
+		Date today = new Date();
+		System.out.println(today);
+		Date d1 = new Date(2020, 01, 01);
+		System.out.println(d1);
+		System.out.println(today.getMonth());
+		System.out.println(d1.getMonth());
+		System.out.println(today.getYear());
+		System.out.println(d1.getYear());
+		
+	}
 		
 		
 		
@@ -206,5 +263,4 @@ public class Printing {
 	
 	
 
-}
 }

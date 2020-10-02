@@ -80,7 +80,11 @@ public class Main {
 						break;
 					//return items
 					case 2:
+						
+				
 						List<Long> picked =print.returnPrint(myItems);
+						
+					
 						for(int i = 0; i <= myItems.size()-1; i++) {
 							//Adding items back to inventory for All Items
 							for(Long itemId: picked) {

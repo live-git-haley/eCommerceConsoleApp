@@ -1,6 +1,6 @@
 package com.cognixia.exceptions;
 
-public class IncorrectInputException extends Exception {
+public class IncorrectInputException extends RuntimeException {
 	/**
 	 * 
 	 */
