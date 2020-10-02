@@ -1,9 +1,10 @@
 package com.cognixia.controller;
 
-import java.awt.List;
+import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,9 +21,9 @@ import com.cognixia.model.ItemHistory;
 public class Purchase {
 
 	
-	public Set<ItemHistory> purchaseItems(Map<Long,Item> items) {
+	public List<ItemHistory> purchaseItems(Map<Long,Item> items) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Set<ItemHistory> history = new HashSet <ItemHistory>();
+		List<ItemHistory> history = new ArrayList <ItemHistory>();
 		System.out.println("Please enter items you would like to purchase followed by 'Enter', press 0 when Done." );
 		
 		
@@ -54,7 +55,7 @@ public class Purchase {
 		
 		while (item!= 0);
 		
-	
+		
 		
 		return(history);
 

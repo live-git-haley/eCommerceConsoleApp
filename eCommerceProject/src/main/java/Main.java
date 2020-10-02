@@ -11,6 +11,7 @@ import com.cognixia.controller.Login;
 import com.cognixia.controller.Purchase;
 import com.cognixia.controller.ReadObjectsFromFile;
 import com.cognixia.controller.WriteObjectsToFile;
+import com.cognixia.exceptions.IncorrectInputException;
 import com.cognixia.model.Customer;
 import com.cognixia.model.Item;
 import com.cognixia.model.ItemHistory;
@@ -19,7 +20,7 @@ import com.cognixia.view.Printing;
 public class Main {
 	
 
-	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
+	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException, IncorrectInputException {
 	
 		ReadObjectsFromFile in = new ReadObjectsFromFile();
 		WriteObjectsToFile out = new WriteObjectsToFile();
@@ -30,11 +31,11 @@ public class Main {
 		Customer currentC = new Customer();
 		
 		Set<Customer> customers = new HashSet<Customer>();
-		Map<Long,Set<ItemHistory>> allHistory = new HashMap<Long,Set<ItemHistory>>();
+		Map<Long,List<ItemHistory>> allHistory = new HashMap<Long,List<ItemHistory>>();
+		
 		Map<Long,Item> allItems = in.readFilefromTxt("src/main/resources/items.txt");
 
-		customers.add(new Customer("Haley", "h", "hhhh1$"));
-		
+	
 		boolean running = true;
 		boolean loggedin = false;
 		Long check = -1L;
@@ -43,6 +44,8 @@ public class Main {
 			for(Customer c: customers) {
 				if(c.getId() == check) {
 					currentC = c;
+					List <ItemHistory> myItems = allHistory.get(currentC.getId());
+
 					System.out.println();
 					System.out.println("--------Welcome Back, " + currentC.getName() + "--------");
 					System.out.println();
@@ -54,26 +57,57 @@ public class Main {
 					//purchase items
 					case 1: 
 						print.printItems(allItems);
-						Set<ItemHistory> history = purchase.purchaseItems(allItems);
-						allHistory.put(currentC.getId(), history);
+						List<ItemHistory> purchased = purchase.purchaseItems(allItems);
+						if(allHistory.containsKey(currentC.getId())) {
+							List<ItemHistory> current = allHistory.get(currentC.getId());
+							for(ItemHistory p: purchased) {
+								allHistory.get(currentC.getId()).add(p);
+							}
+							
+						}
+						else {
+							allHistory.put(currentC.getId(), purchased);
+						}
+						for(ItemHistory i: purchased) {
+							System.out.println(i.getItem().getId());
+							allItems.remove(i.getItem().getId());
+							
+						}
+						
+						
 						
 				
 						break;
 					//return items
 					case 2:
-						Set <ItemHistory> currentHistory = allHistory.get(currentC.getId());
-						List<Integer> picked =print.returnPrint(currentHistory);
+						List<Long> picked =print.returnPrint(myItems);
+						for(int i = 0; i <= myItems.size()-1; i++) {
+							//Adding items back to inventory for All Items
+							for(Long itemId: picked) {
+								if(myItems.get(i).getId() == itemId ) {
+									System.out.println(myItems.get(i).toString());
+									allItems.put(itemId, myItems.get(i).getItem());
+
+									allHistory.get(currentC.getId()).remove(myItems.get(i));
+								};
+							}
+							
+						
+							
+							//Removing items from itemList
+							
+						}
 						
 						
-						for(int i: picked) {
-							System.out.println(i);
-						}	
+						
+						
+						
+							
 						break;
 					//view items	
 					case 3:
-						Set <ItemHistory> currentHistory2 = allHistory.get(currentC.getId());
 						System.out.println("My Items");
-						for(ItemHistory i: currentHistory2) {
+						for(ItemHistory i: myItems) {
 							System.out.println(i);
 						}
 						
@@ -90,6 +124,8 @@ public class Main {
 				
 			}
 		}
+			
+		
 		}
 		else {
 			System.out.println();

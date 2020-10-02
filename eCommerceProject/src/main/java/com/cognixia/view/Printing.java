@@ -3,6 +3,7 @@ package com.cognixia.view;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,6 +13,8 @@ import com.cognixia.controller.Login;
 import com.cognixia.model.Customer;
 import com.cognixia.model.Item;
 import com.cognixia.model.ItemHistory;
+
+import com.cognixia.exceptions.*;
 
 public class Printing {
 	
@@ -159,9 +162,9 @@ public class Printing {
 		
 	}
 	
-	public List<Integer> returnPrint(Set<ItemHistory> purchased){
+	public List<Long> returnPrint(List<ItemHistory> purchased) throws IncorrectInputException{
 		
-		List<Integer> itemsNums = new ArrayList<Integer>();
+		List<Long> itemsNums = new ArrayList<Long>();
 	
 		for(ItemHistory i: purchased) {
 			System.out.println(i.toString());
@@ -169,14 +172,22 @@ public class Printing {
 		
 		Scanner in = new Scanner(System.in);
 		int itemNum = 100;
-		
 		while(itemNum!= 0) {
 			System.out.println("Please select Items to return: ");
 			System.out.println("Press 0 to Enter");
 			System.out.println();
+			try {
 			itemNum = in.nextInt();
+			}
+			catch (InputMismatchException e) {
+				System.out.println("HELLO EXCEPTION");
+//				if(itemNum < 0) {
+//				       throw new IncorrectInputException("Please enter a number......");
+//				    }
+			}
+			
 			if(itemNum!= 0) {
-			itemsNums.add(itemNum);
+			itemsNums.add(Long.parseLong(Integer.toString(itemNum)));
 			}
 		}
 		

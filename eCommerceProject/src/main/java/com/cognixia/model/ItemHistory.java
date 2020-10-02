@@ -17,14 +17,14 @@ public class ItemHistory {
 	
 	public ItemHistory(Date purchaseDate, double price, Item item) {
 		super();
-		this.id = count++;
+		this.id =item.getId();
 		this.purchaseDate = purchaseDate;
 		this.price = price;
 		this.item = item;
 	}
 	
 	public ItemHistory() {
-		this.id = count++;
+		this.id = item.getId();
 		this.purchaseDate = new Date();
 		this.price = 0.0;
 		this.item = new Item();
@@ -50,9 +50,17 @@ public class ItemHistory {
 		this.price = price;
 	}
 
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
 	@Override
 	public String toString() {
-		return "Item #" + item.getId() + "[ purchaseDate=" + purchaseDate + " item=" + item.toString() + "]";
+		return "Item #" + this.id + "[ purchaseDate=" + purchaseDate + " item=" + item.toString() + "]";
 	}
 
 	
