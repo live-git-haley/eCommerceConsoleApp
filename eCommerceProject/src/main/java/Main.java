@@ -69,7 +69,6 @@ public class Main {
 							allHistory.put(currentC.getId(), purchased);
 						}
 						for(ItemHistory i: purchased) {
-							System.out.println(i.getItem().getId());
 							allItems.remove(i.getItem().getId());
 							
 						}
@@ -110,6 +109,7 @@ public class Main {
 						break;
 					//view items	
 					case 3:
+						System.out.println();
 						System.out.println("My Items");
 						for(ItemHistory i: myItems) {
 							System.out.println(i);
@@ -120,6 +120,7 @@ public class Main {
 					//exit
 					case 4:
 						System.out.println("You logged out.");
+						loggedin = false;
 						break;
 						
 					
@@ -147,6 +148,7 @@ public class Main {
 			print.printItems(allItems);
 			}
 			else {
+				System.out.println();
 				System.out.println("You must Login first");
 			}
 			break;
@@ -157,6 +159,7 @@ public class Main {
 				
 			}
 			else {
+				System.out.println();
 				System.out.println("Incorrect username or password");
 			}
 			break;

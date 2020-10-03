@@ -135,8 +135,9 @@ public class Printing {
 		newC.setUsername(username);
 		newC.setPassword(password);
 		
-		System.out.println(newC.toString());
-		
+		System.out.println();
+		System.out.println("Congratulations, you have now registered a new account!   ");
+		System.out.println();
 		
 		
 		return newC;
@@ -181,7 +182,7 @@ public class Printing {
 	public List<Long> returnPrint(List<ItemHistory> purchased) throws IncorrectInputException{
 		List<Long> itemsNums = new ArrayList<Long>();
 		Date today = new Date();
-
+		System.out.println();
 		int number = 0;
 		int count =1;
 		for(ItemHistory i: purchased) {
@@ -191,6 +192,7 @@ public class Printing {
 				
 			}
 			count++;
+			
 			System.out.println(i.toString());
 		}
 		

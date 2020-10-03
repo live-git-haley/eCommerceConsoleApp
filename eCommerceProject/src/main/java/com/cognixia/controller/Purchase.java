@@ -33,19 +33,22 @@ public class Purchase {
 		
 		Long id = Long.parseLong(Integer.toString(item));
 		Item i = items.get(id);
+		System.out.print("You chose ---> ");
 		System.out.println(i.toString());
 		ItemHistory itemH1 = new ItemHistory(new Date(),items.get(id).getPrice(), i);
 
 		history.add(itemH1);
 	
 		do {
+			System.out.println();
 			System.out.println("Please enter Item # : ");
 			item = input.nextInt();
 			Long id2 = Long.parseLong(Integer.toString(item));
-			
+			Item i2 = items.get(id2);
 
 			if(item!= 0) {
-				System.out.println(items.get(id2));
+				System.out.print("You chose ---> ");
+				System.out.println(i2.toString());
 				ItemHistory itemH = new ItemHistory(new Date(),items.get(id2).getPrice(), items.get(id2) );
 				history.add(itemH);
 				
