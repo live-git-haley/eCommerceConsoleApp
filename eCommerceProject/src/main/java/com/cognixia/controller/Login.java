@@ -13,7 +13,7 @@ public class Login {
 	
 	public static boolean passwordMatcher(String password) {
 
-			//Must be atleast 4 charecters, one special character and one number 
+			//Must be atleast 4 characters, one special character and one number 
 		   Pattern pattern = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$", Pattern.CASE_INSENSITIVE);
 		    Matcher matcher = pattern.matcher(password);
 		    boolean matchFound = matcher.find();

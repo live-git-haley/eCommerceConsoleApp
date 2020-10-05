@@ -48,9 +48,7 @@ public class Printing {
 		input.nextLine();
 		}
 		while(choice!= 4 && choice!=2 && choice!=3 && choice!=1);
-		/*
-		 * input.close();
-		 */
+
 		return(choice);
 	}
 	
@@ -67,9 +65,6 @@ public class Printing {
 		System.out.println("4: Exit");
 
 		int choice = input.nextInt();
-		/*
-		 * input.close();
-		 */
 		return(choice);
 	}
 	
@@ -191,11 +186,12 @@ public class Printing {
 		int number = 0;
 		int count =1;
 	
+		//Printing out items in bag, if item is 2nd in list, program will automatically
+		//set item purchase date to 2001, and user will not be able to return item
 		for(ItemHistory i: purchased) {
 			if(count == 2) {
-				Date d1 = new Date(2020, 01, 01);
+				Date d1 = new Date(2001, 01, 01);
 				i.setPurchaseDate(d1);
-				
 			}
 			count++;
 			
@@ -206,11 +202,13 @@ public class Printing {
 		int itemNum = 100;
 		boolean inList = false;
 		Long valid = -100L;
+		
+		///Validation for return policy
 		for(ItemHistory k: purchased) {
 			int itemDate = k.getPurchaseDate().getMonth();
 			int todayDate = today.getMonth();
+			
 			if( todayDate-itemDate > 3) {
-				
 				 valid = k.getId();
 			}
 		}
@@ -222,29 +220,29 @@ public class Printing {
 			System.out.println();
 			try {
 				
-			itemNum = in.nextInt();
-			inList = false;
-			for(ItemHistory i: purchased) {
-				if(i.getId()== itemNum) {
-					inList = true;
-				}
-				
-			}
-			
-			if(!inList && itemNum!=0) {
-				System.out.println("Invalid item number... Please select an item in your purchased items. ");
-				System.out.println();
+				itemNum = in.nextInt();
 				inList = false;
-			}
+				for(ItemHistory i: purchased) {
+					if(i.getId()== itemNum) {
+						inList = true;
+					}
+				
+				}
+			
+				if(!inList && itemNum!=0) {
+					System.out.println("Invalid item number... Please select an item in your purchased items. ");
+					System.out.println();
+					inList = false;
+				}
 				
 		
 			
-			}
+				}
 			catch (InputMismatchException e) {
 				
 				System.out.println("Please enter a valid number....");
 				in.nextLine();
-			}
+				}
 		
 			if(itemNum == valid) {
 				System.out.println("Unable to make return: You must return this item within 3 months of purchase date...");
@@ -252,13 +250,13 @@ public class Printing {
 			}
 			
 			else if(itemNum!= 0 && valid != -100L && inList) {
-			itemsNums.add(Long.parseLong(Integer.toString(itemNum)));
+			
+				itemsNums.add(Long.parseLong(Integer.toString(itemNum)));
 			}
 		}
+		
 		while(itemNum!= 0);
-		
-
-		
+	
 		return(itemsNums);
 	
 	}
