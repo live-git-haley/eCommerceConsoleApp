@@ -32,13 +32,13 @@ public class Main {
 		
 		Set<Customer> customers = new HashSet<Customer>();
 		Map<Long,List<ItemHistory>> allHistory = new HashMap<Long,List<ItemHistory>>();
-		
 		Map<Long,Item> allItems = in.readFilefromTxt("src/main/resources/items.txt");
 
-	
+		Customer currentCust = new Customer("Haley", "h", "hhh1!");
+		customers.add(currentCust);
 		boolean running = true;
-		boolean loggedin = false;
-		Long check = -1L;
+		boolean loggedin = true;
+		Long check = 2L;
 		while(running) {
 		if(loggedin) {
 			for(Customer c: customers) {
@@ -79,16 +79,18 @@ public class Main {
 						break;
 					//return items
 					case 2:
+						 
+						try {
+							List<Long> picked =print.returnPrint(myItems);
 						
-				
-						List<Long> picked =print.returnPrint(myItems);
 						
+						print.makeInvoice(picked, myItems);
 					
 						for(int i = 0; i <= myItems.size()-1; i++) {
 							//Adding items back to inventory for All Items
 							for(Long itemId: picked) {
 								if(myItems.get(i).getId() == itemId ) {
-									System.out.println(myItems.get(i).toString());
+									System.out.println();
 									allItems.put(itemId, myItems.get(i).getItem());
 
 									allHistory.get(currentC.getId()).remove(myItems.get(i));
@@ -100,7 +102,11 @@ public class Main {
 							//Removing items from itemList
 							
 						}
-						
+						}
+						catch(NullPointerException e) {
+							System.out.println();
+							System.out.println("You have not purchased any items yet.....");
+						}
 						
 						
 						

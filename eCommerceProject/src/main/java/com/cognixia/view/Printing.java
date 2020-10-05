@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -147,18 +148,21 @@ public class Printing {
 		
 	}
 	
-	public void makeInvoice(Set<Integer> items, Map<Long,Item> allItems) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public void makeInvoice(List<Long> items, List <ItemHistory> myItems) throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<Long,Item> itemsMap = new HashMap<Long,Item>();
 		
+		for(ItemHistory i: myItems) {
+			itemsMap.put(i.getId(), i.getItem());
+		}
 		
 		System.out.println("_________Invoice________");
 		System.out.println();
 		double total = 0.0;
-		for(int i: items) {
-			Long id = Long.parseLong(Integer.toString(i));
-			System.out.println(allItems.get(id));
-			total = total + allItems.get(id).getPrice();
+		for(long i: items) {
+			System.out.println(itemsMap.get(i));
+			total = total + itemsMap.get(i).getPrice();
 		}
-		
+		System.out.println();
 		System.out.println("Your total is: " +  total);
 		
 	}
@@ -181,10 +185,12 @@ public class Printing {
 	
 	public List<Long> returnPrint(List<ItemHistory> purchased) throws IncorrectInputException{
 		List<Long> itemsNums = new ArrayList<Long>();
+		
 		Date today = new Date();
 		System.out.println();
 		int number = 0;
 		int count =1;
+	
 		for(ItemHistory i: purchased) {
 			if(count == 2) {
 				Date d1 = new Date(2020, 01, 01);
@@ -198,6 +204,7 @@ public class Printing {
 		
 		Scanner in = new Scanner(System.in);
 		int itemNum = 100;
+		boolean inList = false;
 		Long valid = -100L;
 		for(ItemHistory k: purchased) {
 			int itemDate = k.getPurchaseDate().getMonth();
@@ -214,8 +221,23 @@ public class Printing {
 			System.out.println("Press 0 to Enter");
 			System.out.println();
 			try {
-			itemNum = in.nextInt();
 				
+			itemNum = in.nextInt();
+			inList = false;
+			for(ItemHistory i: purchased) {
+				if(i.getId()== itemNum) {
+					inList = true;
+				}
+				
+			}
+			
+			if(!inList && itemNum!=0) {
+				System.out.println("Invalid item number... Please select an item in your purchased items. ");
+				System.out.println();
+				inList = false;
+			}
+				
+		
 			
 			}
 			catch (InputMismatchException e) {
@@ -229,7 +251,7 @@ public class Printing {
 				continue;
 			}
 			
-			else if(itemNum!= 0 && valid != -100L) {
+			else if(itemNum!= 0 && valid != -100L && inList) {
 			itemsNums.add(Long.parseLong(Integer.toString(itemNum)));
 			}
 		}
