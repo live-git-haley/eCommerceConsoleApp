@@ -158,7 +158,7 @@ public class Printing {
 			total = total + itemsMap.get(i).getPrice();
 		}
 		System.out.println();
-		System.out.println("Your total is: " +  total);
+		System.out.println("Total amount in returns: " +  total);
 		
 	}
 	
