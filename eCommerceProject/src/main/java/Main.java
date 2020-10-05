@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,6 @@ import com.cognixia.model.ItemHistory;
 import com.cognixia.view.Printing;
 
 public class Main {
-	
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException, IncorrectInputException {
 	
@@ -34,12 +34,18 @@ public class Main {
 		Map<Long,List<ItemHistory>> allHistory = new HashMap<Long,List<ItemHistory>>();
 		Map<Long,Item> allItems = in.readFilefromTxt("src/main/resources/items.txt");
 
-		Customer currentCust = new Customer("Haley", "h", "hhh1!");
-		customers.add(currentCust);
+//		Customer currentCust = new Customer("Haley", "h", "hhh1!");
+//		customers.add(currentCust);
+//		Long check = 2L;
+//		boolean loggedin = true;
+//		
 		boolean running = true;
-		boolean loggedin = true;
-		Long check = 2L;
+		
+		Long check = -1L;
+		boolean loggedin = false;
+		
 		while(running) {
+			try {
 		if(loggedin) {
 			for(Customer c: customers) {
 				if(c.getId() == check) {
@@ -50,12 +56,16 @@ public class Main {
 					System.out.println("--------Welcome Back, " + currentC.getName() + "--------");
 					System.out.println();
 					
+					
 					int choiceL = print.loginWelcomeMessage();
+					
 					
 					switch(choiceL) {
 					
 					//purchase items
 					case 1: 
+						
+						try {
 						print.printItems(allItems);
 						List<ItemHistory> purchased = purchase.purchaseItems(allItems);
 						if(allHistory.containsKey(currentC.getId())) {
@@ -71,6 +81,10 @@ public class Main {
 						for(ItemHistory i: purchased) {
 							allItems.remove(i.getItem().getId());
 							
+						}
+						}
+						catch(NullPointerException e ) {
+							System.out.println("Invalid input. Please enter a valid item number...");
 						}
 						
 						
@@ -115,10 +129,17 @@ public class Main {
 						break;
 					//view items	
 					case 3:
+						
+						try {
 						System.out.println();
-						System.out.println("My Items");
+						System.out.println("****** My Item List ******");
 						for(ItemHistory i: myItems) {
 							System.out.println(i);
+						}
+						}
+						catch(NullPointerException e) {
+							System.out.println();
+							System.out.println("You have not purchased any items yet.....");
 						}
 						
 					
@@ -184,6 +205,12 @@ public class Main {
 	}
 		}
 		}
+			
+			catch(InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a number.....");
+			}
 	
 }
+	}
+
 }
